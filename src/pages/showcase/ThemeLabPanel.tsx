@@ -204,18 +204,25 @@ export function ThemeLabPanel() {
   );
 
   const isGlobalWorkspace = activeDomain === "global";
+  const isTextWorkspace = themeMode === "text";
   const controlsAreEditable = isGlobalWorkspace || currentModeUsesLocalOverride;
-  const sourceLabel = isGlobalWorkspace ? "System source" : currentModeUsesLocalOverride ? "Custom" : "Linked";
+  const linkedSourceLabel = isTextWorkspace ? "Auto" : "Linked";
+  const sourceLabel = isGlobalWorkspace ? "System source" : currentModeUsesLocalOverride ? "Custom" : linkedSourceLabel;
   const sourceHint = isGlobalWorkspace
     ? "The master palette updates the full preview."
     : currentModeUsesLocalOverride
-      ? "Custom settings are active for this layer."
-      : "Saved custom settings stay here while this layer follows Global.";
+      ? isTextWorkspace
+        ? "Custom text bias settings are active for this layer."
+        : "Custom settings are active for this layer."
+      : isTextWorkspace
+        ? "Saved custom settings stay here while text follows the visible surface mix."
+        : "Saved custom settings stay here while this layer follows Global.";
   const resetLabel = isGlobalWorkspace
     ? "Reset global"
     : currentModeUsesLocalOverride
       ? "Reset custom"
       : "Clear saved custom";
+  const relinkLabel = isTextWorkspace ? "Use auto text" : "Link to Global";
   const exportValue = exportView === "theme" ? exportThemeCss : exportSiteCss;
   const exportHint =
     exportView === "theme"
@@ -282,7 +289,7 @@ export function ThemeLabPanel() {
         hint={sourceHint}
         actions={
           <Pill tone={currentModeUsesLocalOverride ? "accent" : "neutral"}>
-            {currentModeUsesLocalOverride ? "Custom" : isGlobalWorkspace ? "Global" : "Linked"}
+            {currentModeUsesLocalOverride ? "Custom" : isGlobalWorkspace ? "Global" : linkedSourceLabel}
           </Pill>
         }
       >
@@ -293,10 +300,11 @@ export function ThemeLabPanel() {
                 isCustom={currentModeUsesLocalOverride}
                 onLinked={() => setCurrentModeUseLocalOverride(false)}
                 onCustom={() => setCurrentModeUseLocalOverride(true)}
+                linkedLabel={linkedSourceLabel}
               />
               <Cluster className="gap-2">
                 <Button variant="secondary" onClick={resetCurrentModeToGlobal} disabled={!currentModeUsesLocalOverride}>
-                  Link to Global
+                  {relinkLabel}
                 </Button>
                 <Button variant="secondary" onClick={resetCurrentModeAdjustments}>
                   {resetLabel}

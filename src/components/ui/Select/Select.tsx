@@ -7,33 +7,37 @@ export type SelectProps = SelectHTMLAttributes<HTMLSelectElement> & {
 };
 
 export const Select = forwardRef<HTMLSelectElement, SelectProps>(
-  ({ className, children, disabled, fullWidth = false, ...props }, ref) => {
+  ({ className, children, disabled, fullWidth = false, style, ...props }, ref) => {
     return (
-      <select
-        ref={ref}
-        disabled={disabled}
-        className={cn(
-          [
-            "h-control-md appearance-none rounded-inline border border-borderStrong",
-            "bg-surfaceRaised px-2 pr-8 text-sm text-text shadow-sm",
-            "outline-none transition duration-fast ease-standard",
-            "focus-visible:border-accent focus-visible:ring-2 focus-visible:ring-accent",
-            "focus-visible:ring-offset-2 focus-visible:ring-offset-canvas",
-            "disabled:cursor-not-allowed disabled:opacity-50",
-            "bg-[right_var(--space-3)_center] bg-no-repeat",
-          ],
-          fullWidth ? "w-full min-w-0" : "min-w-[16rem]",
-          className,
-        )}
-        style={{
-          backgroundImage:
-            "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none' stroke='%23636B74' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 8 4 4 4-4'/%3E%3C/svg%3E\")",
-          backgroundSize: "1rem 1rem",
-        }}
-        {...props}
-      >
-        {children}
-      </select>
+      <div className={cn("relative", fullWidth ? "w-full min-w-0" : "min-w-[16rem]")}>
+        <select
+          ref={ref}
+          disabled={disabled}
+          className={cn(
+            [
+              "h-control-md w-full min-w-0 appearance-none rounded-inline border border-borderStrong",
+              "bg-surfaceRaised px-2 pr-9 text-sm text-text shadow-sm",
+              "outline-none transition duration-fast ease-standard",
+              "focus-visible:border-accent focus-visible:ring-2 focus-visible:ring-accent",
+              "focus-visible:ring-offset-2 focus-visible:ring-offset-canvas",
+              "disabled:cursor-not-allowed disabled:opacity-50",
+            ],
+            className,
+          )}
+          style={style}
+          {...props}
+        >
+          {children}
+        </select>
+        <span
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-y-0 right-3 flex items-center text-textSubtle"
+        >
+          <svg viewBox="0 0 20 20" fill="none" className="size-4" stroke="currentColor" strokeWidth="1.8">
+            <path d="m6 8 4 4 4-4" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </span>
+      </div>
     );
   },
 );

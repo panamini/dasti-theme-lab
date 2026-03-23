@@ -1,4 +1,4 @@
-import type { ThemeVars } from "../../types";
+import type { ThemeVars } from "@/types";
 
 export function applyThemeToRoot(root: HTMLElement, params: { dark: boolean; vars: ThemeVars }) {
   root.dataset.theme = params.dark ? "dark" : "light";

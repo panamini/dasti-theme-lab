@@ -201,7 +201,7 @@
      ========================================================= */
   --color-canvas: var(--canvas);
   --color-surface: var(--surface);
-  --color-surface-2: var(--surface-muted);
+  --color-surface-muted: var(--surface-muted);
   --color-surface-raised: var(--surface-raised);
 
   --color-text: var(--text);
@@ -226,6 +226,7 @@
 
   /* Temporary compatibility aliases.
      These are migration-only and are not the primary export contract. */
+  --color-surface-2: var(--color-surface-muted);
   --color-success-soft: var(--color-success-bg);
   --color-danger-soft: var(--color-danger-bg);
   --color-warning-soft: var(--color-warning-bg);

@@ -7,7 +7,7 @@ import type {
   PaletteOption,
   TextAdjustments,
   ThemeMode,
-} from "../../types";
+} from "@/types";
 
 export const DEFAULTS = {
   radiusControl: 6,

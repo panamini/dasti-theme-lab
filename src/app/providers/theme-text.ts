@@ -1,4 +1,4 @@
-import type { TextAdjustmentSeed, TextAdjustments, ThemeVars, ToneSeed } from "../../types";
+import type { TextAdjustmentSeed, TextAdjustments, ThemeVars, ToneSeed } from "@/types";
 import { buildThemeFromPreset, clamp, hsl, wrapHue } from "./theme-engine";
 import { DEFAULT_GLOBAL_PRESET } from "./theme-catalogs";
 
@@ -130,9 +130,11 @@ export function buildTextLayer(seed: TextAdjustmentSeed, dark: boolean, adjustme
 }
 
 export function getDefaultTextSeed(dark: boolean): TextAdjustmentSeed {
+  const defaultTheme = buildThemeFromPreset(DEFAULT_GLOBAL_PRESET, dark);
+
   return (
-    createTextSeedFromSurfaces(buildThemeFromPreset(DEFAULT_GLOBAL_PRESET, dark).surfaces, dark) ??
-    createTextSeed(buildThemeFromPreset(DEFAULT_GLOBAL_PRESET, dark).text) ?? {
+    createTextSeedFromSurfaces(defaultTheme.surfaces, dark) ??
+    createTextSeed(defaultTheme.text) ?? {
       text: { h: 0, s: 0, l: 0 },
       muted: { h: 0, s: 0, l: 0 },
       subtle: { h: 0, s: 0, l: 0 },

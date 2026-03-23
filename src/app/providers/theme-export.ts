@@ -5,15 +5,15 @@ function describeColorMode(label: string, linked: boolean, adjustments: ColorAdj
     return `${label}: linked to Global`;
   }
 
-  return `${label}: detached local layer · h ${adjustments.hueShift} / s ${adjustments.saturationBias} / l ${adjustments.lightnessBias}`;
+  return `${label}: local layer over live Global · h ${adjustments.hueShift} / s ${adjustments.saturationBias} / l ${adjustments.lightnessBias}`;
 }
 
 function describeTextMode(linked: boolean, adjustments: TextAdjustments) {
   if (linked) {
-    return "text: linked to Global";
+    return "text: derived from composed surfaces";
   }
 
-  return `text: detached tone layer · contrast ${adjustments.contrastBias} / muted ${adjustments.mutedBias} / subtle ${adjustments.subtleBias} / warmth ${adjustments.warmthBias}`;
+  return `text: local tone layer over composed surfaces · contrast ${adjustments.contrastBias} / muted ${adjustments.mutedBias} / subtle ${adjustments.subtleBias} / warmth ${adjustments.warmthBias}`;
 }
 
 export function buildThemeCss(params: {
@@ -32,9 +32,8 @@ export function buildThemeCss(params: {
     .sort(([a], [b]) => a.localeCompare(b));
 
   const lines = [
-    "/* DASTI canonical theme export */",
-    "/* contract: source role tokens + canonical semantic aliases */",
-    "/* compatibility aliases are intentionally excluded from this export */",
+    "/* DASTI exported theme */",
+    "/* global master + local layer composition */",
     `/* appearance: ${params.dark ? "dark" : "light"} */`,
     `/* global: ${params.globalPreset.baseColor.toUpperCase()} · ${params.globalPreset.paletteType} · h ${params.globalPreset.hue} / s ${params.globalPreset.saturation} / l ${params.globalPreset.lightness} */`,
     `/* ${describeColorMode("accent", !params.accentOverrideEnabled, params.accentAdjustments)} */`,
@@ -50,9 +49,6 @@ export function buildThemeCss(params: {
 
 export function buildStarterSiteCss(themeCss: string) {
   return `${themeCss}
-
-/* DASTI starter site export */
-/* This starter layer uses canonical semantic aliases only. */
 
 html, body {
   min-height: 100%;
@@ -163,7 +159,7 @@ button {
 }
 
 .button-secondary:hover {
-  background: var(--color-surface-2);
+  background: var(--color-surface-muted, var(--color-surface-2));
 }
 
 input,
@@ -199,17 +195,17 @@ button:focus-visible,
 }
 
 .status-success {
-  background: var(--color-success-bg);
+  background: var(--color-success-bg, var(--color-success-soft));
   color: var(--color-success);
 }
 
 .status-danger {
-  background: var(--color-danger-bg);
+  background: var(--color-danger-bg, var(--color-danger-soft));
   color: var(--color-danger);
 }
 
 .status-warning {
-  background: var(--color-warning-bg);
+  background: var(--color-warning-bg, var(--color-warning-soft));
   color: var(--color-warning);
 }
 `;

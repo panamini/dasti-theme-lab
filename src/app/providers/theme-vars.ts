@@ -1,10 +1,10 @@
 import type { FontPair, RadiusState, ThemeResult, ThemeVars } from "@/types";
 
-export function createCanonicalSemanticAliases(vars: ThemeVars): ThemeVars {
+export function createSemanticAliases(vars: ThemeVars): ThemeVars {
   return {
     "--color-canvas": vars["--canvas"] ?? "",
     "--color-surface": vars["--surface"] ?? "",
-    "--color-surface-2": vars["--surface-muted"] ?? "",
+    "--color-surface-muted": vars["--surface-muted"] ?? "",
     "--color-surface-raised": vars["--surface-raised"] ?? "",
     "--color-text": vars["--text"] ?? "",
     "--color-text-muted": vars["--text-muted"] ?? "",
@@ -15,36 +15,17 @@ export function createCanonicalSemanticAliases(vars: ThemeVars): ThemeVars {
     "--color-accent-hover": vars["--accent-hover"] ?? "",
     "--color-accent-soft": vars["--accent-soft"] ?? "",
     "--color-on-accent": vars["--on-accent"] ?? "",
-    "--color-success": vars["--success-text"] ?? "",
     "--color-success-bg": vars["--success-bg"] ?? "",
-    "--color-danger": vars["--danger-text"] ?? "",
+    "--color-success": vars["--success-text"] ?? "",
     "--color-danger-bg": vars["--danger-bg"] ?? "",
-    "--color-warning": vars["--warning-text"] ?? "",
+    "--color-danger": vars["--danger-text"] ?? "",
     "--color-warning-bg": vars["--warning-bg"] ?? "",
+    "--color-warning": vars["--warning-text"] ?? "",
     "--color-focus": vars["--accent"] ?? vars["--text"] ?? "",
-  };
-}
-
-/**
- * Backward-compatible export name kept for the provider.
- * Canonical semantic aliases are now the primary contract.
- */
-export const createSemanticAliases = createCanonicalSemanticAliases;
-
-export function createCompatibilityAliases(vars: ThemeVars): ThemeVars {
-  return {
-    "--color-success-soft": vars["--success-bg"] ? "var(--color-success-bg)" : "",
-    "--color-danger-soft": vars["--danger-bg"] ? "var(--color-danger-bg)" : "",
-    "--color-warning-soft": vars["--warning-bg"] ? "var(--color-warning-bg)" : "",
-    "--background": vars["--canvas"] ?? "",
-    "--foreground": vars["--text"] ?? "",
-    "--primary": vars["--accent"] ?? "",
-    "--primary-foreground": vars["--on-accent"] ?? "",
-    "--muted": vars["--surface-muted"] ?? "",
-    "--muted-foreground": vars["--text-muted"] ?? "",
-    "--card": vars["--surface-raised"] ?? "",
-    "--card-foreground": vars["--text"] ?? "",
-    "--ring": vars["--accent"] ?? "",
+    "--color-surface-2": vars["--surface-muted"] ?? "",
+    "--color-success-soft": vars["--success-bg"] ?? "",
+    "--color-danger-soft": vars["--danger-bg"] ?? "",
+    "--color-warning-soft": vars["--warning-bg"] ?? "",
   };
 }
 
@@ -86,17 +67,12 @@ export function createAppliedThemeVars(params: {
   radiusVars: ThemeVars;
   swatchTheme: ThemeResult;
 }): ThemeVars {
-  const sourceVars = {
+  return {
+    ...createFontVars(params.pair),
     ...params.composedTheme.surfaces,
     ...params.composedTheme.text,
     ...params.composedTheme.accent,
-  };
-
-  return {
-    ...createFontVars(params.pair),
-    ...sourceVars,
     ...params.semanticAliasVars,
-    ...createCompatibilityAliases(sourceVars),
     ...params.radiusVars,
     ...createSwatchVars(params.swatchTheme),
   };
