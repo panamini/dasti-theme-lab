@@ -42,7 +42,7 @@ export function ShowcasePage() {
           </aside>
 
           <Stack space="lg">
-            <Card padding="section" className="rounded-surface bg-gradient-to-b from-surface to-surfaceRaised">
+            <Card padding="lg" className="rounded-surface bg-gradient-to-b from-surface to-surfaceRaised">
               <Stack space="lg">
                 <Cluster justify="between" align="start" className="gap-3">
                   <Stack space="sm" className="min-w-0">
@@ -63,7 +63,7 @@ export function ShowcasePage() {
                 </Cluster>
 
                 <div className="grid gap-4 lg:grid-cols-[1.15fr_0.85fr]">
-                  <Card padding="section" className="rounded-surface border-borderStrong">
+                  <Card padding="lg" className="rounded-surface border-borderStrong">
                     <Stack space="md">
                       <Stack space="sm">
                         <p className="m-0 text-sm font-semibold uppercase tracking-[0.12em] text-accentHover">Hero</p>
@@ -71,7 +71,7 @@ export function ShowcasePage() {
                           Brand system preview
                         </h2>
                         <p className="m-0 max-w-[54ch] text-base text-textMuted">
-                          Accent, surfaces, text, type, and radius are all coming from the current composed theme.
+                          Accent, surfaces, and text come from the current composed theme, with type and radius applied alongside it.
                         </p>
                       </Stack>
 
@@ -88,7 +88,7 @@ export function ShowcasePage() {
                     </Stack>
                   </Card>
 
-                  <Card padding="panel" tone="muted" className="rounded-surface">
+                  <Card padding="md" tone="muted" className="rounded-surface">
                     <Stack space="md">
                       <p className="m-0 text-sm font-semibold uppercase tracking-[0.12em] text-accentHover">Surface stack</p>
                       <Stack space="sm">
@@ -106,7 +106,7 @@ export function ShowcasePage() {
             </Card>
 
             <Grid cols={2} gap="lg" align="stretch">
-              <Card padding="section" className="rounded-surface">
+              <Card padding="lg" className="rounded-surface">
                 <Stack space="md">
                   <Cluster justify="between" align="center">
                     <p className="m-0 text-sm font-semibold uppercase tracking-[0.12em] text-accentHover">Components</p>
@@ -114,7 +114,7 @@ export function ShowcasePage() {
                   </Cluster>
 
                   <Grid cols={1} gap="md">
-                    <Card padding="panel" tone="muted">
+                    <Card padding="md" tone="muted">
                       <Stack space="sm">
                         <p className="m-0 text-sm font-semibold text-text">Editorial card</p>
                         <h3 className="m-0 font-heading text-lg tracking-[-0.01em] text-heading">Structured, not noisy</h3>
@@ -124,7 +124,7 @@ export function ShowcasePage() {
                       </Stack>
                     </Card>
 
-                    <Card padding="panel" tone="muted">
+                    <Card padding="md" tone="muted">
                       <Stack space="sm">
                         <p className="m-0 text-sm font-semibold text-text">Form block</p>
                         <input
@@ -142,7 +142,7 @@ export function ShowcasePage() {
                 </Stack>
               </Card>
 
-              <Card padding="section" className="rounded-surface">
+              <Card padding="lg" className="rounded-surface">
                 <Stack space="md">
                   <Cluster justify="between" align="center">
                     <p className="m-0 text-sm font-semibold uppercase tracking-[0.12em] text-accentHover">Harmony</p>
@@ -168,7 +168,7 @@ export function ShowcasePage() {
             </Grid>
 
             <Grid cols={2} gap="lg" align="stretch">
-              <Card padding="section" className="rounded-surface">
+              <Card padding="lg" className="rounded-surface">
                 <Stack space="md">
                   <p className="m-0 text-sm font-semibold uppercase tracking-[0.12em] text-accentHover">Type</p>
                   <Stack space="sm">
@@ -182,7 +182,7 @@ export function ShowcasePage() {
                 </Stack>
               </Card>
 
-              <Card padding="section" className="rounded-surface">
+              <Card padding="lg" className="rounded-surface">
                 <Stack space="md">
                   <p className="m-0 text-sm font-semibold uppercase tracking-[0.12em] text-accentHover">Rhythm</p>
                   <Stack space="sm">

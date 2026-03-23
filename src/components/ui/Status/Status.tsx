@@ -4,7 +4,7 @@ import type { HTMLAttributes } from "react";
 import { cn } from "@/lib/cn";
 
 const statusVariants = cva(
-  "inline-flex min-h-[var(--control-sm)] items-center gap-2 rounded-inline border border-transparent px-3 text-body-sm font-medium leading-none whitespace-nowrap select-none",
+  "inline-flex min-h-[var(--control-sm)] items-center justify-center gap-2 rounded-inline border border-transparent px-3 text-body-sm font-medium leading-none whitespace-nowrap select-none",
   {
     variants: {
       tone: {

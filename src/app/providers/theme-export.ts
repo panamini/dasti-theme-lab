@@ -10,10 +10,10 @@ function describeColorMode(label: string, linked: boolean, adjustments: ColorAdj
 
 function describeTextMode(linked: boolean, adjustments: TextAdjustments) {
   if (linked) {
-    return "text: derived from composed surfaces";
+    return "text: linked to Global";
   }
 
-  return `text: local tone layer over composed surfaces · contrast ${adjustments.contrastBias} / muted ${adjustments.mutedBias} / subtle ${adjustments.subtleBias} / warmth ${adjustments.warmthBias}`;
+  return `text: detached tone layer · contrast ${adjustments.contrastBias} / muted ${adjustments.mutedBias} / subtle ${adjustments.subtleBias} / warmth ${adjustments.warmthBias}`;
 }
 
 export function buildThemeCss(params: {
@@ -116,14 +116,14 @@ p {
   border: 1px solid var(--color-border);
   border-radius: var(--radius-card, 16px);
   box-shadow: var(--shadow-sm);
-  padding: var(--space-4, 32px);
+  padding: var(--space-2, 16px);
 }
 
 .panel {
   background: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-surface, 18px);
-  padding: var(--space-4, 32px);
+  padding: var(--space-3, 24px);
 }
 
 .button,
@@ -159,7 +159,7 @@ button {
 }
 
 .button-secondary:hover {
-  background: var(--color-surface-muted, var(--color-surface-2));
+  background: var(--color-surface-2);
 }
 
 input,
@@ -195,17 +195,17 @@ button:focus-visible,
 }
 
 .status-success {
-  background: var(--color-success-bg, var(--color-success-soft));
+  background: var(--color-success-soft);
   color: var(--color-success);
 }
 
 .status-danger {
-  background: var(--color-danger-bg, var(--color-danger-soft));
+  background: var(--color-danger-soft);
   color: var(--color-danger);
 }
 
 .status-warning {
-  background: var(--color-warning-bg, var(--color-warning-soft));
+  background: var(--color-warning-soft);
   color: var(--color-warning);
 }
 `;

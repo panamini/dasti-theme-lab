@@ -13,10 +13,12 @@ const cardVariants = cva(
       padding: {
         panel: "p-4",
         section: "p-6",
+        md: "p-4",
+        lg: "p-6",
       },
       interactive: {
         true: [
-          "cursor-default",
+          "cursor-pointer",
           "hover:-translate-y-0.5 hover:border-borderStrong hover:shadow-md",
           "focus-within:border-borderStrong focus-within:ring-2 focus-within:ring-focus/35 focus-within:ring-offset-2 focus-within:ring-offset-canvas",
         ].join(" "),
