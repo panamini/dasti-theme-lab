@@ -38,9 +38,10 @@ import { applyThemeToRoot, copyCssToClipboard, downloadCssFile } from "./theme-r
 import { buildTextLayer, createTextSeedFromSurfaces, getDefaultTextSeed } from "./theme-text";
 import {
   createAppliedThemeVars,
+  createCanonicalSemanticAliases,
+  createCompatibilitySemanticAliases,
   createExportedThemeVars,
   createRadiusVars,
-  createSemanticAliases,
 } from "./theme-vars";
 
 type ThemeContextValue = {
@@ -273,9 +274,19 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     };
   }, [composedTheme, themeMode]);
 
-  const semanticAliasVars = useMemo<ThemeVars>(
+  const canonicalAliasVars = useMemo<ThemeVars>(
     () =>
-      createSemanticAliases({
+      createCanonicalSemanticAliases({
+        ...composedTheme.surfaces,
+        ...composedTheme.text,
+        ...composedTheme.accent,
+      }),
+    [composedTheme],
+  );
+
+  const compatibilityAliasVars = useMemo<ThemeVars>(
+    () =>
+      createCompatibilitySemanticAliases({
         ...composedTheme.surfaces,
         ...composedTheme.text,
         ...composedTheme.accent,
@@ -379,10 +390,10 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
       createExportedThemeVars({
         pair: selectedPair,
         composedTheme,
-        semanticAliasVars,
+        canonicalAliasVars,
         radiusVars,
       }),
-    [composedTheme, radiusVars, selectedPair, semanticAliasVars],
+    [canonicalAliasVars, composedTheme, radiusVars, selectedPair],
   );
 
   const exportThemeCss = useMemo(
@@ -430,11 +441,12 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
       createAppliedThemeVars({
         pair: selectedPair,
         composedTheme,
-        semanticAliasVars,
+        canonicalAliasVars,
+        compatibilityAliasVars,
         radiusVars,
         swatchTheme,
       }),
-    [composedTheme, radiusVars, selectedPair, semanticAliasVars, swatchTheme],
+    [canonicalAliasVars, compatibilityAliasVars, composedTheme, radiusVars, selectedPair, swatchTheme],
   );
 
   useEffect(() => {

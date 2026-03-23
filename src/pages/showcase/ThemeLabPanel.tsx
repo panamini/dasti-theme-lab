@@ -22,7 +22,7 @@ type SectionProps = {
 
 function ThemeLabSection({ label, title, hint, actions, children }: SectionProps) {
   return (
-    <Card padding="md" tone="muted" className="rounded-surface">
+    <Card padding="panel" tone="muted" className="rounded-surface">
       <Stack space="md">
         <Cluster justify="between" align="start" className="gap-3">
           <Stack space="xs" className="min-w-0">
@@ -222,7 +222,6 @@ export function ThemeLabPanel() {
     : currentModeUsesLocalOverride
       ? "Reset custom"
       : "Clear saved custom";
-  const relinkLabel = isTextWorkspace ? "Use auto text" : "Link to Global";
   const exportValue = exportView === "theme" ? exportThemeCss : exportSiteCss;
   const exportHint =
     exportView === "theme"
@@ -253,7 +252,7 @@ export function ThemeLabPanel() {
 
   return (
     <Stack space="md" className="xl:sticky xl:top-6">
-      <Card padding="md" className="rounded-surface border-borderStrong shadow-md backdrop-blur">
+      <Card padding="panel" className="rounded-surface border-borderStrong shadow-md backdrop-blur">
         <Stack space="md">
           <Cluster justify="between" align="start" className="gap-3">
             <Stack space="xs" className="min-w-0">
@@ -304,7 +303,7 @@ export function ThemeLabPanel() {
               />
               <Cluster className="gap-2">
                 <Button variant="secondary" onClick={resetCurrentModeToGlobal} disabled={!currentModeUsesLocalOverride}>
-                  {relinkLabel}
+                  {isTextWorkspace ? "Use auto text" : "Link to Global"}
                 </Button>
                 <Button variant="secondary" onClick={resetCurrentModeAdjustments}>
                   {resetLabel}

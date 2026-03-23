@@ -29,8 +29,8 @@ export const buttonVariants = cva(
         ].join(" "),
       },
       size: {
-        md: "h-control-md px-2.5",
-        lg: "h-control-lg px-3",
+        control: "h-control-md px-2.5",
+        prominent: "h-control-lg px-3",
       },
       fullWidth: {
         true: "w-full",
@@ -39,7 +39,7 @@ export const buttonVariants = cva(
     },
     defaultVariants: {
       variant: "primary",
-      size: "md",
+      size: "control",
       fullWidth: false,
     },
   },

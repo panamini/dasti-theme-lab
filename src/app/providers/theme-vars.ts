@@ -1,6 +1,6 @@
 import type { FontPair, RadiusState, ThemeResult, ThemeVars } from "@/types";
 
-export function createSemanticAliases(vars: ThemeVars): ThemeVars {
+export function createCanonicalSemanticAliases(vars: ThemeVars): ThemeVars {
   return {
     "--color-canvas": vars["--canvas"] ?? "",
     "--color-surface": vars["--surface"] ?? "",
@@ -22,6 +22,11 @@ export function createSemanticAliases(vars: ThemeVars): ThemeVars {
     "--color-warning-bg": vars["--warning-bg"] ?? "",
     "--color-warning": vars["--warning-text"] ?? "",
     "--color-focus": vars["--accent"] ?? vars["--text"] ?? "",
+  };
+}
+
+export function createCompatibilitySemanticAliases(vars: ThemeVars): ThemeVars {
+  return {
     "--color-surface-2": vars["--surface-muted"] ?? "",
     "--color-success-soft": vars["--success-bg"] ?? "",
     "--color-danger-soft": vars["--danger-bg"] ?? "",
@@ -63,7 +68,8 @@ export function createRadiusVars(radius: RadiusState): ThemeVars {
 export function createAppliedThemeVars(params: {
   pair: FontPair;
   composedTheme: ThemeResult;
-  semanticAliasVars: ThemeVars;
+  canonicalAliasVars: ThemeVars;
+  compatibilityAliasVars: ThemeVars;
   radiusVars: ThemeVars;
   swatchTheme: ThemeResult;
 }): ThemeVars {
@@ -72,7 +78,8 @@ export function createAppliedThemeVars(params: {
     ...params.composedTheme.surfaces,
     ...params.composedTheme.text,
     ...params.composedTheme.accent,
-    ...params.semanticAliasVars,
+    ...params.canonicalAliasVars,
+    ...params.compatibilityAliasVars,
     ...params.radiusVars,
     ...createSwatchVars(params.swatchTheme),
   };
@@ -81,14 +88,14 @@ export function createAppliedThemeVars(params: {
 export function createExportedThemeVars(params: {
   pair: FontPair;
   composedTheme: ThemeResult;
-  semanticAliasVars: ThemeVars;
+  canonicalAliasVars: ThemeVars;
   radiusVars: ThemeVars;
 }): ThemeVars {
   return {
     ...params.composedTheme.surfaces,
     ...params.composedTheme.text,
     ...params.composedTheme.accent,
-    ...params.semanticAliasVars,
+    ...params.canonicalAliasVars,
     ...params.radiusVars,
     ...createFontVars(params.pair),
   };
