@@ -29,7 +29,6 @@ const typeSamples = [
 ] as const;
 
 const spacing = ["8", "16", "24", "32", "48"] as const;
-const swatchRoles = ["Anchor", "Support", "Lift", "Contrast"] as const;
 
 export function ShowcasePage() {
   const { dark, paletteType, selectedPair, composedTheme } = useThemeSystem();
