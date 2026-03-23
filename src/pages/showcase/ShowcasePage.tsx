@@ -29,6 +29,7 @@ const typeSamples = [
 ] as const;
 
 const spacing = ["8", "16", "24", "32", "48"] as const;
+const swatchRoles = ["Anchor", "Support", "Lift", "Contrast"] as const;
 
 export function ShowcasePage() {
   const { dark, paletteType, selectedPair, composedTheme } = useThemeSystem();
@@ -149,20 +150,21 @@ export function ShowcasePage() {
                     <Pill>Live preview</Pill>
                   </Cluster>
 
-                  <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
-                    {composedTheme.swatches.map((swatch: ThemeSwatch, index: number) => (
-                      <div
-                        key={`${swatch.hue}-${index}`}
-                        className="rounded-item border border-border bg-surface p-2 text-sm text-text"
-                      >
-                        <div
-                          className="mb-2 h-10 rounded-inline border border-border"
-                          style={{ background: swatch.color }}
-                        />
-                        <span className="text-textSubtle">H {swatch.hue}</span>
-                      </div>
-                    ))}
-                  </div>
+                  <div className="grid grid-cols-2 gap-2">
+  {composedTheme.swatches.slice(0, 4).map((swatch: ThemeSwatch, index: number) => (
+    <div
+      key={`${swatch.hue}-${index}`}
+      className="rounded-item border border-border bg-surface px-2.5 py-2.5"
+    >
+      <div
+        className="mb-2 h-12 w-full rounded-inline border border-border/60"
+        style={{ backgroundColor: swatch.color }}
+      />
+      
+      
+    </div>
+  ))}
+</div>
                 </Stack>
               </Card>
             </Grid>

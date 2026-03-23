@@ -12,6 +12,8 @@ import { ThemeSwitch } from "@/components/ui/ThemeSwitch/ThemeSwitch";
 import { cn } from "@/lib/cn";
 import type { ThemeMode } from "@/types";
 
+import { ThemeMoodPicker } from "./ThemeMoodPicker";
+
 type SectionProps = {
   label: string;
   title: string;
@@ -224,9 +226,9 @@ export function ThemeLabPanel() {
       : "Clear saved custom";
   const exportValue = exportView === "theme" ? exportThemeCss : exportSiteCss;
   const exportHint =
-  exportView === "theme"
-    ? "Source-of-truth theme tokens"
-    : "Ready-made starter layer built on the theme tokens";
+    exportView === "theme"
+      ? "Source-of-truth theme tokens"
+      : "Ready-made starter layer built on the theme tokens";
 
   const handleCopyExport = async () => {
     try {
@@ -323,6 +325,19 @@ export function ThemeLabPanel() {
 
           {isGlobalWorkspace ? (
             <Stack space="md">
+              <ThemeMoodPicker
+                baseColor={baseColor}
+                paletteType={paletteType}
+                globalHue={globalHue}
+                globalSaturation={globalSaturation}
+                globalLightness={globalLightness}
+                setBaseColor={setBaseColor}
+                setPaletteType={setPaletteType}
+                setGlobalHue={setGlobalHue}
+                setGlobalSaturation={setGlobalSaturation}
+                setGlobalLightness={setGlobalLightness}
+              />
+
               <Stack space="sm">
                 <label htmlFor="lab-base-color" className="text-sm font-medium text-textMuted">
                   Base color
@@ -379,7 +394,7 @@ export function ThemeLabPanel() {
             </Stack>
           ) : null}
 
-          {(themeMode === "accent" || themeMode === "surface") ? (
+          {themeMode === "accent" || themeMode === "surface" ? (
             <Grid cols={1} gap="md">
               <SliderField
                 id="local-hue"
@@ -454,7 +469,8 @@ export function ThemeLabPanel() {
         </Stack>
       </ThemeLabSection>
 
-      <ThemeLabSection label="Type" title="Typography" hint="Pairing changes both heading and body.">        <Stack space="sm">
+      <ThemeLabSection label="Type" title="Typography" hint="Pairing changes both heading and body.">
+        <Stack space="sm">
           <Select
             id="lab-font-pair"
             value={selectedPairId}
